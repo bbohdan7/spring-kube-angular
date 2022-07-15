@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class UserComponentComponent implements OnInit {
 
   users!: User[]
-  user: User = new User()
+  selectedUser: User = new User()
   currentRate = 5
 
   public itemsParent = ["first", "second", "third", "forth", "fifth"]
@@ -19,6 +19,14 @@ export class UserComponentComponent implements OnInit {
   constructor(private userService: UserServiceService, private router: Router) { }
 
   ngOnInit(): void {
+    this.fetchUsers()
+  }
+
+  ngAfterViewInit(){
+    setInterval(() => this.fetchUsers(), 3000)
+  }
+
+  fetchUsers(): void {
     this.userService.getUsers().subscribe(data => {
       console.log(data)
       this.users = data
@@ -32,6 +40,10 @@ export class UserComponentComponent implements OnInit {
 
   addItem(value: string) {
     this.itemsParent.push(value)
+  }
+
+  showInfo(usr: User) {
+    this.selectedUser = usr
   }
 
 }

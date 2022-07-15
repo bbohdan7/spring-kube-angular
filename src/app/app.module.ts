@@ -7,6 +7,10 @@ import { UserComponentComponent } from './user-component/user-component.componen
 import { ProductAlertsComponent } from './product-alerts/product-alerts.component';
 import { HelloworldDirective } from './helloworld.directive';
 import { AlignCenterDirective } from './align-center.directive';
+import { ShowUserComponent } from './show-user/show-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,12 +18,16 @@ import { AlignCenterDirective } from './align-center.directive';
     UserComponentComponent,
     ProductAlertsComponent,
     HelloworldDirective,
-    AlignCenterDirective
+    AlignCenterDirective,
+    ShowUserComponent,
+    EditUserComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

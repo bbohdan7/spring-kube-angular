@@ -1,0 +1,24 @@
+<div class="row" *ngIf="userExits; else notFound">
+    <hr>
+    <div class="col-md-4">
+        <button (click)="back()" class="btn btn-primary"> <i class="bi bi-arrow-90deg-left"></i> Back</button>
+    </div>
+    <div class="col-md-4">
+        <h1 class="text-center">Information about <u>{{ user.firstName }} {{ user.lastName }}</u></h1>
+
+        <ul class="list-group">
+            <li class="list-group-item">ID: <u>{{ user.id }}</u></li>
+            <li class="list-group-item">First name: <u>{{ user.firstName }}</u></li>
+            <li class="list-group-item">Last name: <u>{{ user.lastName }}</u></li>
+            <li class="list-group-item">Email: <u>{{ user.email }}</u></li>
+        </ul>
+    </div>
+    <div class="col-md-4 text-end">
+        <a class="btn btn-warning" [href]="'/users/edit/' + user.id">Edit <i class="bi bi-wrench"></i></a>
+    </div>
+</div>
+<ng-template #notFound>
+    <div class="container">
+        <h1>Cannot display information about non-existing User</h1>
+    </div>
+</ng-template>
