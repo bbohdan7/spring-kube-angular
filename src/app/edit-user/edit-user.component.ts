@@ -13,17 +13,16 @@ export class EditUserComponent implements OnInit {
 
   id!: Number
   user: User = new User()
-  userExists: Boolean = false
+  userExists: Boolean = true
 
   constructor(private service: UserServiceService, private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(param => this.id = param['id'])
-    
-    this.service.findById(this.id).subscribe(response => {
-      this.user = response
 
-      if(response) this.userExists = true
+    this.service.findById(this.id).subscribe({
+      next: data => this.user = data,
+      error: err => this.userExists = false
     })
   }
 

@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
+import { ErrorHandler, Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators'
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
-import { Observable, throwError } from 'rxjs'
-import { map } from 'rxjs/operators'
-import { User } from './user';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +17,8 @@ export class UserServiceService {
   }
 
   public findById(id: Number): Observable<any> {
-    return this.http.get(this.endpoint + `/users/${id}`)
+    return this.http.get(this.endpoint + `/users/${id}`).pipe(
+    )
   }
 
   public create(data: any): Observable<any> {
@@ -28,6 +27,10 @@ export class UserServiceService {
 
   public update(id: Number, data: any): Observable<any> {
     return this.http.put(this.endpoint + `/users/${id}`, data, { headers: new HttpHeaders({ 'Content-Type': "application/json" }) })
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    return throwError(() => error.status)
   }
 
 }
