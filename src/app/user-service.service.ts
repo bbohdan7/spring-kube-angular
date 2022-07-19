@@ -31,7 +31,19 @@ export class UserServiceService {
 
   public delete(id: number): Observable<any> {
     console.log(`Trying to delete user with id: ${id}`)
-    return this.http.delete(this.endpoint + `/users/${id}`)
+    return this.http.delete(this.endpoint + `/users/${id}`).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.status === 0) {
+      console.log(`An error occurred: ${error.error}`)
+    } else {
+      console.log(`Backend returned code ${error.status}, body was: ${error.error}`)
+    }
+    
+    return throwError(() => new Error("Something goes wrong!"))
   }
 
 }

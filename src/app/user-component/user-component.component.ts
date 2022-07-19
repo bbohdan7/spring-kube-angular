@@ -27,11 +27,13 @@ export class UserComponentComponent implements OnInit {
   selectedUser: User = new User()
   currentRate = 5
   isAnimate: boolean = true
+  userDeleted!: boolean
 
   constructor(private userService: UserServiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchUsers()
+    console.log(`Reinit of the component`)
   }
 
   ngAfterViewInit() {
@@ -55,7 +57,9 @@ export class UserComponentComponent implements OnInit {
   }
 
   deleteUser(): void {
-    this.userService.delete(this.selectedUser.id)
+    this.userService.delete(this.selectedUser.id).subscribe(response => console.log(`Error while deleting: ${response}`))
+    this.fetchUsers()
+    this.userDeleted = true
   }
 
 }

@@ -2,8 +2,14 @@
   <br>
   <a href="/create-user" class="btn btn-warning"><i class="bi bi-person"></i> Create user</a>
 
-  <div class="container" id="colorContainer" style="cursor: pointer" appHelloworld [show]="isAnimate" (click)="isAnimate = !isAnimate" >
+  <div class="container" id="colorContainer" style="cursor: pointer"  >
     <h3>Hello, World!</h3>
+  </div>
+
+  <div class="alert alert-success alert-dismissible fade show" role="alert" [hidden]="!userDeleted">
+    <strong>User {{ selectedUser.firstName }} {{ selectedUser.lastName }}</strong> has been successfully deleted!
+
+    <button class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="bi bi-x"></i></button>
   </div>
 
   <br><br>
