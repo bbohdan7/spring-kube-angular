@@ -29,8 +29,9 @@ export class UserServiceService {
     return this.http.put(this.endpoint + `/users/${id}`, data, { headers: new HttpHeaders({ 'Content-Type': "application/json" }) })
   }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    return throwError(() => error.status)
+  public delete(id: number): Observable<any> {
+    console.log(`Trying to delete user with id: ${id}`)
+    return this.http.delete(this.endpoint + `/users/${id}`)
   }
 
 }

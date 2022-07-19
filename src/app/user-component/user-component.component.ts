@@ -1,20 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostBinding, OnInit } from '@angular/core';
 import { UserServiceService } from '../user-service.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-user-component',
   templateUrl: './user-component.component.html',
-  styleUrls: ['./user-component.component.css']
+  styleUrls: ['./user-component.component.css'],
+  // animations: [
+  //   trigger('upDown', [
+  //     state('up', style({
+        
+  //     })),
+  //     state('down', style({
+        
+  //     })),
+  //     transition('up => down', [ animate("2s") ]),
+  //     transition('down => up', [ animate("1s") ])
+  //   ])
+  // ]
 })
 export class UserComponentComponent implements OnInit {
 
   users!: User[]
   selectedUser: User = new User()
   currentRate = 5
-
-  public itemsParent = ["first", "second", "third", "forth", "fifth"]
+  isAnimate: boolean = true
 
   constructor(private userService: UserServiceService, private router: Router) { }
 
@@ -22,7 +34,7 @@ export class UserComponentComponent implements OnInit {
     this.fetchUsers()
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     setInterval(() => this.fetchUsers(), 3000)
   }
 
@@ -38,12 +50,12 @@ export class UserComponentComponent implements OnInit {
     console.log(id)
   }
 
-  addItem(value: string) {
-    this.itemsParent.push(value)
+  selectUser(usr: User) {
+    this.selectedUser = usr
   }
 
-  showInfo(usr: User) {
-    this.selectedUser = usr
+  deleteUser(): void {
+    this.userService.delete(this.selectedUser.id)
   }
 
 }
