@@ -8,7 +8,7 @@ import { Observable, throwError } from 'rxjs';
 })
 export class UserServiceService {
 
-  private endpoint = "http://192.168.0.137:8080"
+  private endpoint = "http://192.168.0.195:8080"
 
   constructor(private http: HttpClient) { }
 
